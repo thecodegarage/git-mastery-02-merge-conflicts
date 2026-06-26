@@ -51,21 +51,39 @@ This repository simulates a **Task Management App** project with contributions f
 
 ## 🚀 Getting Started
 
-### 1. Verify Repository Setup
+### 1. Create Practice Environment
+
+**IMPORTANT**: Before starting exercises, run the setup script to create practice history:
 
 ```bash
-# You should be in this directory
-pwd
-# Should show: .../01-merge-conflicts
+# Make script executable (first time only)
+chmod +x build-history.sh
 
-# Verify Git is initialized
-git status
-
-# View commit history
-git log --oneline --graph --all
+# Run the setup script
+./build-history.sh
 ```
 
-### 2. Understand the Project
+This script creates:
+- **~45 commits** from 4 fictional developers
+- **Multiple feature branches** with conflicting changes
+- **Realistic project history** for practice
+
+**Takes ~10 seconds to complete.**
+
+### 2. Verify Repository Setup
+
+```bash
+# View commit history (should see many commits now)
+git log --oneline --graph --all
+
+# Check branches (should see feature branches)
+git branch -a
+
+# Verify files were created
+ls src/
+```
+
+### 3. Understand the Project
 
 This is a simple task management application with:
 
