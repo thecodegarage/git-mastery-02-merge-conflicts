@@ -31,7 +31,7 @@ By completing this repository, you will:
 
 This repository simulates a **Task Management App** project with contributions from multiple team members. The commit history includes:
 
-- **~10 commits** from 4 different developers
+- **~45 commits** from 4 different developers
 - **Multiple feature branches** with overlapping changes
 - **Intentional conflicts** in various file types
 - **Real-world scenarios** you'll encounter on teams
@@ -64,7 +64,7 @@ chmod +x build-history.sh
 ```
 
 This script creates:
-- **~10 commits** from 4 fictional developers
+- **~45 commits** from 4 fictional developers
 - **Multiple feature branches** with conflicting changes
 - **Realistic project history** for practice
 
