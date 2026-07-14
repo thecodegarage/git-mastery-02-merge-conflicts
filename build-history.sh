@@ -3,6 +3,65 @@
 
 cd "$(dirname "$0")"
 
+# Create project structure
+mkdir -p src tests docs
+
+# Create initial files
+cat > src/ui.js << 'EOF'
+// UI Components
+
+const UI = {
+  renderTaskList(tasks) {
+    const container = document.getElementById('task-list');
+    container.innerHTML = tasks.map(task => `
+      <div class="task ${task.completed ? 'completed' : ''}">
+        <h3>${task.title}</h3>
+        <p>${task.description}</p>
+      </div>
+    `).join('');
+  }
+};
+
+module.exports = UI;
+EOF
+
+cat > src/utils.js << 'EOF'
+// Utility Functions
+
+function formatDate(date) {
+  return new Date(date).toLocaleDateString();
+}
+
+function generateId() {
+  return Date.now();
+}
+
+module.exports = { formatDate, generateId };
+EOF
+
+cat > src/styles.css << 'EOF'
+/* Task Manager Styles */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f5f5f5;
+}
+
+.task {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+EOF
+
 # Commit utility files
 git add src/ui.js src/utils.js src/styles.css
 GIT_AUTHOR_NAME="Marcus Rodriguez" GIT_AUTHOR_EMAIL="marcus@example.com" \
