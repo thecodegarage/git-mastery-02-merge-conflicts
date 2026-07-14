@@ -70,6 +70,8 @@ This script creates:
 
 **Takes ~10 seconds to complete.**
 
+**Need to start over?** Just run `./build-history.sh` again and type `y` to reset everything!
+
 ### 2. Verify Repository Setup
 
 ```bash
@@ -242,11 +244,23 @@ git reset --hard origin/main  # If you have remote
 
 ### Reset Entire Repository
 
+**Easiest way:** Just re-run the setup script!
+
+```bash
+./build-history.sh
+# Type 'y' when prompted to delete and rebuild
+```
+
+**Alternative:** Re-clone from scratch
+
 ```bash
 # From parent directory
 cd ..
-rm -rf 01-merge-conflicts
-# Re-copy from original
+rm -rf git-mastery-02-merge-conflicts
+git clone https://github.com/TheCodeGarage/git-mastery-02-merge-conflicts
+cd git-mastery-02-merge-conflicts
+chmod +x build-history.sh
+./build-history.sh
 ```
 
 ## 📚 Additional Resources
