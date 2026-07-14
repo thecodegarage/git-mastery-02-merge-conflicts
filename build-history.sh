@@ -1,7 +1,45 @@
 #!/bin/bash
 # Script to build realistic commit history
 
+set -e  # Exit on error
+
 cd "$(dirname "$0")"
+
+echo "🚀 Building Git history for merge conflicts practice..."
+echo ""
+
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check if src/ directory already exists
+if [ -d "src" ]; then
+    echo -e "${YELLOW}⚠️  Warning: Practice environment already exists${NC}"
+    read -p "Delete and rebuild? This will reset all practice work. (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Aborting. Run script again when ready to reset."
+        exit 1
+    fi
+    
+    echo -e "${BLUE}🧹 Cleaning up existing practice environment...${NC}"
+    
+    # Clean up directories
+    rm -rf src/ docs/ tests/
+    
+    # Reset to origin/master to remove practice commits
+    git reset --hard origin/master 2>/dev/null || git reset --hard HEAD~20 2>/dev/null || true
+    
+    # Clean up any existing feature branches
+    git branch | grep -v "^\*" | grep -v "master" | grep -v "main" | xargs -r git branch -D 2>/dev/null || true
+    
+    echo -e "${GREEN}✅ Cleanup complete${NC}"
+    echo ""
+fi
+
+echo -e "${BLUE}📁 Creating project structure...${NC}"
 
 # Create project structure
 mkdir -p src tests docs
@@ -365,5 +403,17 @@ GIT_COMMITTER_NAME="Aisha Patel" GIT_COMMITTER_EMAIL="aisha@example.com" \
 GIT_AUTHOR_DATE="2024-01-21T10:30:00" GIT_COMMITTER_DATE="2024-01-21T10:30:00" \
 git commit -m "Add category system for tasks"
 
-echo "Created 10 commits across main and 2 feature branches"
 git checkout master
+
+echo ""
+echo -e "${GREEN}✅ Setup complete!${NC}"
+echo ""
+echo "Created 10 commits across main and 2 feature branches"
+echo ""
+echo "Next steps:"
+echo "  1. Verify setup: git log --oneline --graph --all"
+echo "  2. Check branches: git branch -a"
+echo "  3. Start exercises: open EXERCISES.md"
+echo ""
+echo "To reset and start over, just run ./build-history.sh again"
+
