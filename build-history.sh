@@ -14,6 +14,12 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Always clean up any existing feature branches first (even if src/ doesn't exist)
+echo -e "${BLUE}🧹 Cleaning up any existing feature branches...${NC}"
+for branch in feature/task-priority feature/task-categories feature/due-dates feature/ui-redesign feature/offline-support experimental/drag-and-drop hotfix/date-format-bug; do
+    git branch -D "$branch" 2>/dev/null || true
+done
+
 # Check if src/ directory already exists
 if [ -d "src" ]; then
     echo -e "${YELLOW}⚠️  Warning: Practice environment already exists${NC}"
